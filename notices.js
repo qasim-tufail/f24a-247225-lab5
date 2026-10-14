@@ -5,8 +5,9 @@ const left = document.querySelector("#left");
 const right = document.querySelector("#right");
 const move = document.querySelector("#move");
 const fireAt = document.querySelector("#fire-at");
+const spot = document.querySelector("#spot");
 
-if (!wall || !up || !down || !left || !right || !move || !fireAt) {
+if (!wall || !up || !down || !left || !right || !move || !fireAt || !spot) {
   throw new Error("A needed node is missing");
 }
 
@@ -112,4 +113,32 @@ function swap(a, b) {
   aRow.insertBefore(b, aNext);
 }
 
-function goMove() {}
+function goMove() {
+  const current = getCurrent();
+  if (current === null) {
+    return;
+  }
+
+  const position = Number(spot.value);
+  if (position < 1 || position > 6) {
+    return;
+  }
+
+  // the other notices in order, with the current one placed at its spot
+  const order = [];
+  const all = wall.querySelectorAll(".notice");
+  for (let i = 0; i < all.length; i++) {
+    if (all[i] !== current) {
+      order.push(all[i]);
+    }
+  }
+  order.splice(position - 1, 0, current);
+
+  // three notices per row
+  const rows = wall.querySelectorAll(".row");
+  for (let i = 0; i < order.length; i++) {
+    rows[Math.floor(i / 3)].append(order[i]);
+  }
+
+  afterMove();
+}
