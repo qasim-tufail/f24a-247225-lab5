@@ -114,12 +114,20 @@ function swap(a, b) {
 }
 
 function goMove() {
+  const position = Number(spot.value);
+
+  if (isNaN(position)) {
+    spot.setCustomValidity("not a number");
+    spot.reportValidity();
+    return;
+  }
+  spot.setCustomValidity("");
+
   const current = getCurrent();
   if (current === null) {
     return;
   }
 
-  const position = Number(spot.value);
   if (position < 1 || position > 6) {
     return;
   }
