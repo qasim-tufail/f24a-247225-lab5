@@ -6,8 +6,9 @@ const right = document.querySelector("#right");
 const move = document.querySelector("#move");
 const fireAt = document.querySelector("#fire-at");
 const spot = document.querySelector("#spot");
+const status = document.querySelector("#status");
 
-if (!wall || !up || !down || !left || !right || !move || !fireAt || !spot) {
+if (!wall || !up || !down || !left || !right || !move || !fireAt || !spot || !status) {
   throw new Error("A needed node is missing");
 }
 
@@ -45,7 +46,9 @@ function showFirePosition() {
 }
 
 function afterMove() {
+  const current = getCurrent();
   showFirePosition();
+  status.textContent = "Moved " + current.querySelector("span").textContent + ".";
 }
 
 function goLeft() {
