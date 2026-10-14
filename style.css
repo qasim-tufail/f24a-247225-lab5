@@ -36,3 +36,17 @@ footer {
   margin: 0;
   cursor: pointer;
 }
+
+.now {
+  background: #e8c4c4;
+  border-color: maroon;
+}
+
+#controls {
+  margin: 15px 0;
+}
+
+button, input {
+  padding: 6px;
+  margin-right: 5px;
+}
